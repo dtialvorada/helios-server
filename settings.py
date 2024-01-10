@@ -8,23 +8,27 @@ import os
 import ldap
 from django_auth_ldap.config import LDAPSearch
 
+from dotenv import load_dotenv
+load_dotenv()
+
 TESTING = 'test' in sys.argv
+
 
 # go through environment variables and override them
 def get_from_env(var, default):
     if not TESTING and var in os.environ:
-        return os.environ[var]
+        return os.environ.get(var)
     else:
         return default
 
 DEBUG = (get_from_env('DEBUG', '1') == '1')
 
 # add admins of the form: 
-#    ('Ben Adida', 'ben@adida.net'),
+#    ('Admin Name', 'admin@campus.ifrs.edu.br'),
 # if you want to be emailed about errors.
-admin_email = get_from_env('ADMIN_EMAIL', None)
+admin_email = get_from_env('ADMIN_EMAIL', 'admin.email@campus.ifrs.edu.br')
 if admin_email:
-    ADMINS = [(get_from_env('ADMIN_NAME', ''), admin_email)]
+    ADMINS = [(get_from_env('ADMIN_NAME', 'AdminName'), admin_email)]
 else:
     ADMINS = []
 
@@ -35,7 +39,7 @@ MASTER_HELIOS = (get_from_env('MASTER_HELIOS', '0') == '1')
 
 # show ability to log in? (for example, if the site is mostly used by voters)
 # if turned off, the admin will need to know to go to /auth/login manually
-SHOW_LOGIN_OPTIONS = (get_from_env('SHOW_LOGIN_OPTIONS', '1') == '1')
+SHOW_LOGIN_OPTIONS = (get_from_env('SHOW_LOGIN_OPTIONS', '1') == '0')
 
 # sometimes, when the site is not that social, it's not helpful
 # to display who created the election
@@ -60,11 +64,11 @@ if get_from_env('DATABASE_URL', None):
 # although not all choices may be available on all operating systems.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Los_Angeles'
+TIME_ZONE = 'America/Sao_Paulo'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-BR'
 
 SITE_ID = 1
 
@@ -87,7 +91,7 @@ MEDIA_URL = ''
 STATIC_URL = '/media/'
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = get_from_env('SECRET_KEY', 'replaceme')
+SECRET_KEY = get_from_env('SECRET_KEY', 'randomkey.read.documentation.randomkey.read.documentation')
 
 # If debug is set to false and ALLOWED_HOSTS is not declared, django raises  "CommandError: You must set settings.ALLOWED_HOSTS if DEBUG is False."
 # If in production, you got a bad request (400) error
@@ -183,8 +187,8 @@ VOTER_UPLOAD_REL_PATH = "voters/%Y/%m/%d"
 
 
 # Change your email settings
-DEFAULT_FROM_EMAIL = get_from_env('DEFAULT_FROM_EMAIL', 'ben@adida.net')
-DEFAULT_FROM_NAME = get_from_env('DEFAULT_FROM_NAME', 'Ben for Helios')
+DEFAULT_FROM_EMAIL = get_from_env('DEFAULT_FROM_EMAIL', 'email@campus.ifrs.edu.br')
+DEFAULT_FROM_NAME = get_from_env('DEFAULT_FROM_NAME', 'Helios Voting')
 SERVER_EMAIL = '%s <%s>' % (DEFAULT_FROM_NAME, DEFAULT_FROM_EMAIL)
 
 LOGIN_URL = '/auth/'
@@ -200,7 +204,7 @@ URL_HOST = get_from_env("URL_HOST", "http://localhost:8000").rstrip("/")
 SECURE_URL_HOST = get_from_env("SECURE_URL_HOST", URL_HOST).rstrip("/")
 
 # election stuff
-SITE_TITLE = get_from_env('SITE_TITLE', 'Helios Voting')
+SITE_TITLE = get_from_env('SITE_TITLE', 'IFRS E-Voting System')
 MAIN_LOGO_URL = get_from_env('MAIN_LOGO_URL', '/static/logo.png')
 ALLOW_ELECTION_INFO_URL = (get_from_env('ALLOW_ELECTION_INFO_URL', '0') == '1')
 
@@ -208,9 +212,9 @@ ALLOW_ELECTION_INFO_URL = (get_from_env('ALLOW_ELECTION_INFO_URL', '0') == '1')
 FOOTER_LINKS = json.loads(get_from_env('FOOTER_LINKS', '[]'))
 FOOTER_LOGO_URL = get_from_env('FOOTER_LOGO_URL', None)
 
-WELCOME_MESSAGE = get_from_env('WELCOME_MESSAGE', "This is the default message")
+WELCOME_MESSAGE = get_from_env('WELCOME_MESSAGE', "Welcome to IFRS E-Voting System")
 
-HELP_EMAIL_ADDRESS = get_from_env('HELP_EMAIL_ADDRESS', 'help@heliosvoting.org')
+HELP_EMAIL_ADDRESS = get_from_env('HELP_EMAIL_ADDRESS', 'email@campus.ifrs.edu.br')
 
 AUTH_TEMPLATE_BASE = "server_ui/templates/base.html"
 HELIOS_TEMPLATE_BASE = "server_ui/templates/base.html"
@@ -224,9 +228,9 @@ HELIOS_PRIVATE_DEFAULT = False
 # authentication systems enabled
 # AUTH_ENABLED_SYSTEMS = ['password','facebook','twitter', 'google', 'yahoo']
 AUTH_ENABLED_SYSTEMS = get_from_env('AUTH_ENABLED_SYSTEMS',
-                                    get_from_env('AUTH_ENABLED_AUTH_SYSTEMS', 'password,google,facebook')
+                                    get_from_env('AUTH_ENABLED_AUTH_SYSTEMS', 'ldap')
                                     ).split(",")
-AUTH_DEFAULT_SYSTEM = get_from_env('AUTH_DEFAULT_SYSTEM', get_from_env('AUTH_DEFAULT_AUTH_SYSTEM', None))
+AUTH_DEFAULT_SYSTEM = get_from_env('AUTH_DEFAULT_SYSTEM', get_from_env('AUTH_DEFAULT_AUTH_SYSTEM', 'ldap'))
 
 # google
 GOOGLE_CLIENT_ID = get_from_env('GOOGLE_CLIENT_ID', '')
@@ -265,11 +269,11 @@ GH_CLIENT_ID = get_from_env('GH_CLIENT_ID', '')
 GH_CLIENT_SECRET = get_from_env('GH_CLIENT_SECRET', '')
 
 # email server
-EMAIL_HOST = get_from_env('EMAIL_HOST', 'localhost')
-EMAIL_PORT = int(get_from_env('EMAIL_PORT', "2525"))
-EMAIL_HOST_USER = get_from_env('EMAIL_HOST_USER', '')
-EMAIL_HOST_PASSWORD = get_from_env('EMAIL_HOST_PASSWORD', '')
-EMAIL_USE_TLS = (get_from_env('EMAIL_USE_TLS', '0') == '1')
+EMAIL_HOST = get_from_env('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_PORT = int(get_from_env('EMAIL_PORT', "587"))
+EMAIL_HOST_USER = get_from_env('EMAIL_HOST_USER', 'email@campus.ifrs.edu.br')
+EMAIL_HOST_PASSWORD = get_from_env('EMAIL_HOST_PASSWORD', 'DigiteSenhaAqui')
+EMAIL_USE_TLS = (get_from_env('EMAIL_USE_TLS', '0') == '0')
 
 # to use AWS Simple Email Service
 # in which case environment should contain
@@ -304,11 +308,12 @@ if ROLLBAR_ACCESS_TOKEN:
 
 # ldap
 # see configuration example at https://pythonhosted.org/django-auth-ldap/example.html
-AUTH_LDAP_SERVER_URI = "ldap://ldap.forumsys.com" # replace by your Ldap URI
-AUTH_LDAP_BIND_DN = "cn=read-only-admin,dc=example,dc=com"
-AUTH_LDAP_BIND_PASSWORD = "password"
-AUTH_LDAP_USER_SEARCH = LDAPSearch("dc=example,dc=com",
-    ldap.SCOPE_SUBTREE, "(uid=%(user)s)"
+AUTH_LDAP_SERVER_URI = get_from_env('AUTH_LDAP_SERVER_URI', "ldaps://nomedoservidor.campus.ifrs.edu.br")
+AUTH_LDAP_BIND_DN = get_from_env('AUTH_LDAP_BIND_DN',"CN=user,OU=Users,DC=campus,DC=ifrs,DC=edu,DC=br")
+AUTH_LDAP_BIND_PASSWORD = get_from_env('AUTH_LDAP_BIND_PASSWORD',"AltereSenhaAqui")
+BASE_DN = get_from_env('BASE_DN', 'DC=campus,DC=ifrs,DC=edu,DC=br')
+AUTH_LDAP_USER_SEARCH = LDAPSearch(BASE_DN,
+    ldap.SCOPE_SUBTREE, "(sAMAccountName=%(user)s)"
 )
 
 AUTH_LDAP_USER_ATTR_MAP = {
