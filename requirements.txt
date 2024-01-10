@@ -26,3 +26,5 @@ rollbar==0.14.7
 #ldap auth
 django_auth_ldap==4.0.0
 python-ldap==3.4.3
+httplib2~=0.22.0
+python-dotenv~=1.0.0
