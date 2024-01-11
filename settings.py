@@ -1,4 +1,4 @@
-
+import django.conf
 # a massive hack to see if we're testing, in which case we use different settings
 import sys
 
@@ -7,7 +7,7 @@ import os
 
 import ldap
 from django_auth_ldap.config import LDAPSearch
-
+from django.utils.translation import ugettext_lazy as _
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -21,7 +21,9 @@ def get_from_env(var, default):
     else:
         return default
 
+
 DEBUG = (get_from_env('DEBUG', '1') == '1')
+BASE_DIR = os.path.dirname(__file__)
 
 # add admins of the form: 
 #    ('Admin Name', 'admin@campus.ifrs.edu.br'),
@@ -64,17 +66,30 @@ if get_from_env('DATABASE_URL', None):
 # although not all choices may be available on all operating systems.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
 TIME_ZONE = 'America/Sao_Paulo'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'pt-BR'
+LANGUAGE_CODE = 'pt-br'
+
+LANGUAGES = (
+    ('en', _('English')),
+    ('pt-br', _('Brazilian Portuguese')),
+)
 
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
-USE_I18N = True
+
+
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale')
+]
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
@@ -133,6 +148,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'urls'
