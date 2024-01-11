@@ -60,18 +60,18 @@
                 <li><a href="/">{{ settings.SITE_TITLE }}</a></li>
                 {% if settings.MASTER_HELIOS %}
                     <li class="divider"></li>
-                    <li class="active"><a href="/about">About</a></li>
+                    <li class="active"><a href="/about">{% trans 'About' %}</a></li>
                     <li class="divider"></li>
-                    <li><a target="_new" href="https://github.com/benadida/helios-server">Code</a></li>
+                    <li><a target="_new" href="https://github.com/benadida/helios-server">{% trans 'Code' %}</a></li>
                     <li class="divider"></li>
                     <li><a href="/docs">Docs</a></li>
                     <li class="divider"></li>
                     <li><a href="/faq">FAQ</a></li>
                     <li class="divider"></li>
-                    <li><a href="/privacy">Privacy</a></li>
+                    <li><a href="/privacy">{% trans 'Privacy' %}</a></li>
                 {% endif %}
                 <li class="divider"></li>
-                <li><a href="mailto:{{ settings.HELP_EMAIL_ADDRESS }}">Help!</a></li>
+                <li><a href="mailto:{{ settings.HELP_EMAIL_ADDRESS }}">{% trans 'Help!' %}</a></li>
             </ul>
         </section>
     </nav>
@@ -93,23 +93,23 @@
       {% endif %}
     </span>-->
     {% if user %}
-        logged in as <b>{{ user.display_html_small|safe }}</b>&nbsp;&nbsp;
-        <a class="tiny button" href="{% url "auth@logout" %}?return_url={{ CURRENT_URL }}">logout</a><br/>
+        {% trans 'logged in as' %} <b>{{ user.display_html_small|safe }}</b>&nbsp;&nbsp;
+        <a class="tiny button" href="{% url "auth@logout" %}?return_url={{ CURRENT_URL }}">{% trans 'logout' %}</a><br/>
     {% else %}
         {% if voter %}
-            You are signed in as voter <u>{% if voter.alias %}{{ voter.alias }}{% else %}{{ voter.name }}{% endif %}</u>
-            in election <u>{{ voter.election.name }}</u>. [
-            <a href="{{ settings.SECURE_URL_HOST }}{% url "auth@logout" %}?return_url={{ CURRENT_URL }}">sign out</a>]
+            {% trans 'You are signed in as voter' %} <u>{% if voter.alias %}{{ voter.alias }}{% else %}{{ voter.name }}{% endif %}</u>
+            {% trans 'in election' %} <u>{{ voter.election.name }}</u>. [
+            <a href="{{ settings.SECURE_URL_HOST }}{% url "auth@logout" %}?return_url={{ CURRENT_URL }}">{% trans 'sign out' %}</a>]
         {% else %}
             {% if settings.SHOW_LOGIN_OPTIONS %}
-                not logged in.<a class="tiny button" href="
-                    {{ settings.SECURE_URL_HOST }}{% url "auth@index" %}?return_url={{ CURRENT_URL }}">log in</a>
+                {% trans 'not logged in.' %}<a class="tiny button" href="
+                    {{ settings.SECURE_URL_HOST }}{% url "auth@index" %}?return_url={{ CURRENT_URL }}">{% trans 'log in' %}</a>
             {% else %}
-                {% trans 'powered by' %} <a href="http://heliosvoting.org"> Helios Voting - Site Oficial</a>.
+                {% trans 'powered by' %} <a href="http://heliosvoting.org"> Helios Voting</a>.
             {% endif %}
         {% endif %}
     {% endif %}
-    <br clear="right"/>
+    <br/>
 </div>
 
 </div>

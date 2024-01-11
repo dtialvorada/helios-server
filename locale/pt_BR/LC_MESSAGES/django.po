@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# FIRST AUTHOR <DTI>, 2024.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-11 18:53-0300\n"
+"POT-Creation-Date: 2024-01-11 19:56-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,10 +37,52 @@ msgid "Login"
 msgstr "Login"
 
 #: server_ui/templates/base.html:55
-#, fuzzy
-#| msgid "about helios"
 msgid "About Helios"
 msgstr "Sobre o Helios"
+
+#: server_ui/templates/base.html:63
+msgid "About"
+msgstr "Sobre"
+
+#: server_ui/templates/base.html:65
+msgid "Code"
+msgstr "Código"
+
+#: server_ui/templates/base.html:71
+msgid "Privacy"
+msgstr "Privacidade"
+
+#: server_ui/templates/base.html:74
+msgid "Help!"
+msgstr "Ajuda!"
+
+#: server_ui/templates/base.html:96
+msgid "logged in as"
+msgstr "logado como"
+
+#: server_ui/templates/base.html:97
+msgid "logout"
+msgstr "sair"
+
+#: server_ui/templates/base.html:100
+msgid "You are signed in as voter"
+msgstr "Você está conectado como eleitor"
+
+#: server_ui/templates/base.html:101
+msgid "in election"
+msgstr "na eleição"
+
+#: server_ui/templates/base.html:102
+msgid "sign out"
+msgstr "sair"
+
+#: server_ui/templates/base.html:105
+msgid "not logged in."
+msgstr "não logado."
+
+#: server_ui/templates/base.html:106
+msgid "log in"
+msgstr "Conecte-se"
 
 #: server_ui/templates/base.html:108
 msgid "powered by"
@@ -53,6 +95,10 @@ msgstr "Inglês"
 #: settings.py:80
 msgid "Brazilian Portuguese"
 msgstr "Português(BR)"
+
+#: settings.py:231
+msgid "Welcome to IFRS E-Voting System"
+msgstr "Bem-vindo ao Sistema de Votação Eletrônica do IFRS"
 
 #: templates/404.html:5
 msgid "The page you requested could not be found"
