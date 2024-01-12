@@ -17,6 +17,7 @@ from django.core.paginator import Paginator
 from django.db import transaction, IntegrityError
 from django.http import HttpResponse, Http404, HttpResponseRedirect, HttpResponseForbidden
 from django.urls import reverse
+from django.utils.translation import ugettext as _
 
 import helios_auth.url_names as helios_auth_urls
 from helios import utils, VOTERS_EMAIL, VOTERS_UPLOAD, url_names
@@ -1350,7 +1351,8 @@ def voters_email(request, election):
   default_subject = render_template_raw(None, 'email/%s_subject.txt' % template, {
       'custom_subject': "&lt;SUBJECT&gt;"
 })
-  default_body = render_template_raw(None, 'email/%s_body.txt' % template, {
+
+  default_body = render_template_raw(None,  _("email/%s_body.txt") % template, {
       'election' : election,
       'election_url' : election_url,
       'election_vote_url' : election_vote_url,
@@ -1375,7 +1377,7 @@ def voters_email(request, election):
       
       # the client knows to submit only once with a specific voter_id
       subject_template = 'email/%s_subject.txt' % template
-      body_template = 'email/%s_body.txt' % template
+      body_template = _("email/%s_body.txt") % template
 
       extra_vars = {
         'custom_subject' : email_form.cleaned_data['subject'],

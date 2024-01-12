@@ -68,7 +68,7 @@ if get_from_env('DATABASE_URL', None):
 # system time zone.
 USE_I18N = True
 USE_L10N = True
-USE_TZ = True
+USE_TZ = False
 TIME_ZONE = 'America/Sao_Paulo'
 
 # Language code for this installation. All choices can be found here:
