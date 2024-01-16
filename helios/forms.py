@@ -8,7 +8,7 @@ from django.conf import settings
 from .fields import SplitDateTimeField
 from .models import Election
 from .widgets import SplitSelectDateTimeWidget
-
+from django.utils.translation import ugettext as _
 
 class ElectionForm(forms.Form):
   short_name = forms.SlugField(max_length=40, help_text='no spaces, will be part of the URL for your election, e.g. my-club-2010')
@@ -45,6 +45,6 @@ class TallyNotificationEmailForm(forms.Form):
   send_to = forms.ChoiceField(label="Send To", choices= [('all', 'all voters'), ('voted', 'only voters who cast a ballot'), ('none', 'no one -- are you sure about this?')])
 
 class VoterPasswordForm(forms.Form):
-  voter_id = forms.CharField(max_length=50, label="Voter ID")
-  password = forms.CharField(widget=forms.PasswordInput(), max_length=100)
+  voter_id = forms.CharField(max_length=50, label=_("Voter ID"))
+  password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': _('Password')}), max_length=100, label=_("Password"))
 

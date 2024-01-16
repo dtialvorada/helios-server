@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-12 19:38-0300\n"
+"POT-Creation-Date: 2024-01-16 18:39-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,58 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: helios/forms.py:48
+msgid "Voter ID"
+msgstr "ID do Eleitor"
+
+#: helios/forms.py:49 helios_auth/templates/ldapauth/login.html:17
+#: helios_auth/templates/ldapauth/login.html:18
+msgid "Password"
+msgstr "Senha"
+
+#: helios/templates/_castconfirm_password.html:11
+msgid "bad voter ID or password, please try again."
+msgstr "Usuário ou senha incorretos, por favor, tente novamente."
+
+#: helios/templates/_castconfirm_password.html:17
+msgid "Your voter ID and password can be found in the email you received."
+msgstr ""
+"Seu ID de eleitor e senha podem ser encontrados no e-mail que você recebeu."
+
+#: helios/templates/_castconfirm_password.html:18
+msgid ""
+"If you cannot find your login information, contact your election "
+"administrator at"
+msgstr ""
+"Se você não conseguir encontrar suas informações de login, entre em contato "
+"com o administrador "
+
+#: helios/templates/_castconfirm_password.html:22
+msgid "Cast as many ballots as you wish: only the last one counts."
+msgstr ""
+"Você pode repetir esse processo quantas vezes desejar enquanto a eleição "
+"estiver aberta. Apenas o último voto depositado é considerado."
+
+#: helios/templates/_castconfirm_password.html:25
+msgid "Log in"
+msgstr "Conecte-se"
+
+#: helios/templates/password_voter_login.html:3
+msgid "Log In to View Election"
+msgstr "Conectar para Visualizar Eleições"
+
+#: helios/templates/password_voter_login.html:5
+msgid "Private Election - Please Log In"
+msgstr "Por favor, conecte-se."
+
+#: helios/templates/password_voter_login.html:8
+msgid "This election, with fingerprint "
+msgstr "Esta eleição, com o Código de Identificação "
+
+#: helios/templates/password_voter_login.html:9
+msgid " is private, and can only be viewed by eligible voters."
+msgstr "é privada e só pode ser visualizada pelos eleitores elegíveis."
 
 #: helios/views.py:1355 helios/views.py:1380
 #, python-format
@@ -30,11 +82,6 @@ msgstr "Logar com sua conta LDAP"
 #: helios_auth/templates/ldapauth/login.html:12
 msgid "Username"
 msgstr "Usuário"
-
-#: helios_auth/templates/ldapauth/login.html:17
-#: helios_auth/templates/ldapauth/login.html:18
-msgid "Password"
-msgstr "Senha"
 
 #: helios_auth/templates/ldapauth/login.html:21
 msgid "Login"
